@@ -1,23 +1,26 @@
 {
-    "name": "stata-enhanced",
-    "displayName": "Stata Enhanced",
-    "description": "Enhanced Stata syntax highlighting in Visual Studio Code",
+    "name": "language-stata",
+    "displayName": "Stata Language",
+    "description": "Stata syntax highlighting in Visual Studio Code",
     "author": {
         "name": "Kyle Barron"
     },
-    "version": "1.6.1",
-    "publisher": "kylebarron",
+    "contributors": [
+        "CHARLS"
+    ],
+    "version": "2.0.0",
+    "publisher": "CHARLS",
     "engines": {
         "vscode": "^1.0.0"
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/kylebarron/language-stata/issues"
+        "url": "https://github.com/charls-data/language-stata/issues"
     },
-    "homepage": "https://github.com/kylebarron/language-stata/blob/vscode/README.md",
+    "homepage": "https://github.com/charls-data/language-stata/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/kylebarron/language-stata.git"
+        "url": "https://github.com/charls-data/language-stata.git"
     },
     "categories": [
         "Programming Languages"

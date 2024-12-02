@@ -713,49 +713,108 @@
             ]
         },
         {
-            "begin": "^\\s*python:?\\s*$",
+            "begin": "^\\s*(python):?\\s*$",
             "comment": "Python code block",
-            "end": "^\\s*end\\s*$\\n?",
+            "end": "^\\s*(end)\\s*$\\n?",
             "name": "meta.embedded.block.python",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.flow.stata"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.control.embedded.python"
+                }
+            },
+            "contentName": "source.python.embedded",
             "patterns": [
+                {"include": "#python-expression"},
                 {
-                    "match": "\\b(def|class|if|elif|else|for|while|try|except|finally|with|as|return|break|continue|pass|import|from|lambda|global|nonlocal|raise|yield|assert)\\b",
-                    "name": "keyword.control.python"
+                    "comment": "Highlight Python functions and quoted strings in their arguments",
+                    "patterns": [
+                        {
+                            "name": "meta.function-call.python",
+                            "match": "\\b(\\w+)\\s*\\(",
+                            "captures": {
+                                "1": {
+                                    "name": "entity.name.function.python"
+                                }
+                            }
+                        },
+                        {
+                            "comment": "Highlight strings (double or single quoted) in function arguments",
+                            "match": "(\"[^\"]*\"|'[^']*')",
+                            "name": "string.quoted.single-or-double.python"
+                        },
+                        {
+                            "comment": "Highlight commas and parentheses in function calls",
+                            "match": "[,()]",
+                            "name": "punctuation.definition.separator.python"
+                        },
+                        {
+                            "comment": "Highlight arguments in function calls",
+                            "match": "\\b\\w+\\b(?=\\s*(,|\\)))",
+                            "name": "variable.parameter.function.python"
+                        }
+                    ]
                 },
                 {
-                    "match": "\\+|-|\\*|\\/|%|\\*\\*|//|=|==|!=|<|>|<=|>=|\\+=|-=|\\*=|\\/=|%=|\\*\\*=|//=|\\.|,|:|\\(|\\)|\\[|\\]|\\{|\\}",
-                    "name": "keyword.operator.python"
-                },
-                {
-                    "match": "\\b(True|False|None)\\b",
-                    "name": "constant.language.python"
-                },
-                {
-                    "match": "\\b(int|float|str|list|tuple|dict|set|bool|bytes|object)\\b",
-                    "name": "support.type.python"
-                },
-                {
-                    "match": "(?<!\\w)#.*$",
-                    "name": "comment.line.number-sign.python"
-                },
-                {
-                    "begin": "(\"\"\"|''')",
-                    "end": "\\1",
-                    "name": "string.quoted.multi.python",
-                    "patterns": []
-                },
-                {
-                    "begin": "(\"|')",
-                    "end": "\\1",
-                    "name": "string.quoted.single.python",
-                    "patterns": []
-                },
-                {
-                    "match": "\\b(and|or|not|is|in)\\b",
-                    "name": "keyword.operator.logical.python"
-                },
-                {
-                    "include": "$self"
+                    "comment": "Highlight embedded expressions within f-strings",
+                    "begin": "f(['\"]{3}|['\"])",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "end": "(?<!\\{)\\1",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.python"
+                        }
+                    },
+                    "name": "string.quoted.fstring.python",
+                    "patterns": [
+                        {
+                            "comment": "Embedded expressions within f-strings",
+                            "begin": "\\{",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.embedded.begin.python"
+                                }
+                            },
+                            "end": "\\}",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.section.embedded.end.python"
+                                }
+                            },
+                            "name": "source.python.embedded.expression",
+                            "patterns": [
+                                {"include": "#python-expression"},
+                                {
+                                    "comment": "Highlight variables in expressions",
+                                    "match": "\\b\\w+\\b",
+                                    "name": "variable.other.python"
+                                },
+                                {
+                                    "comment": "Highlight operators",
+                                    "match": "[+\\-*/%=<>!&|^~]+",
+                                    "name": "keyword.operator.python"
+                                },
+                                {
+                                    "comment": "Highlight numeric literals",
+                                    "match": "\\b\\d+(\\.\\d+)?\\b",
+                                    "name": "constant.numeric.python"
+                                },
+                                {
+                                    "comment": "Highlight string literals in expressions",
+                                    "match": "(\"[^\"]*\"|'[^']*'|'''.*'''|\"\"\".*\"\"\")",
+                                    "name": "string.quoted.single-or-double.python"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         },
@@ -3150,6 +3209,51 @@
                             "name": "constant.other.character-class.range.stata"
                         }
                     ]
+                }
+            ]
+        },
+        "python-expression": {
+            "patterns": [
+                {
+                    "match": "\\b(def|class|if|elif|else|for|while|try|except|finally|with|as|return|break|continue|pass|import|from|lambda|global|nonlocal|raise|yield|assert)\\b",
+                    "name": "keyword.control.python"
+                },
+                {
+                    "match": "\\+|-|\\*|\\/|%|\\*\\*|//|=|==|!=|<|>|<=|>=|\\+=|-=|\\*=|\\/=|%=|\\*\\*=|//=|\\.|,|:|\\(|\\)|\\[|\\]|\\{|\\}",
+                    "name": "keyword.operator.python"
+                },
+                {
+                    "match": "\\b(True|False|None)\\b",
+                    "name": "constant.language.python"
+                },
+                {
+                    "match": "\\b(int|float|str|list|tuple|dict|set|bool|bytes|object)\\b",
+                    "name": "support.type.python"
+                },
+                {
+                    "match": "(?<!\\w)#.*$",
+                    "name": "comment.line.number-sign.python"
+                },
+                {
+                    "begin": "(\"\"\"|''')",
+                    "end": "\\1",
+                    "name": "string.quoted.multi.python",
+                    "patterns": []
+                },
+                {
+                    "begin": "(\"|')",
+                    "end": "\\1",
+                    "name": "string.quoted.single-or-double.python",
+                    "patterns": []
+                },
+                {
+                    "match": "\\b(and|or|not|is|in)\\b",
+                    "name": "keyword.operator.logical.python"
+                },
+                {
+                    "comment": "Highlight commas and parentheses",
+                    "match": "[,()]",
+                    "name": "punctuation.definition.separator.python"
                 }
             ]
         }

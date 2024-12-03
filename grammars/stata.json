@@ -754,7 +754,7 @@
                         },
                         {
                             "comment": "Highlight arguments in function calls",
-                            "match": "\\b\\w+\\b(?=\\s*(,|\\)))",
+                            "match": "\\b(?!\\d)\\w+\\b(?=\\s*(=|,|\\)|\\n))",
                             "name": "variable.parameter.function.python"
                         }
                     ]

@@ -729,92 +729,8 @@
             },
             "contentName": "source.python.embedded",
             "patterns": [
-                {"include": "#python-expression"},
                 {
-                    "comment": "Highlight Python functions and quoted strings in their arguments",
-                    "patterns": [
-                        {
-                            "name": "meta.function-call.python",
-                            "match": "\\b(\\w+)\\s*\\(",
-                            "captures": {
-                                "1": {
-                                    "name": "entity.name.function.python"
-                                }
-                            }
-                        },
-                        {
-                            "comment": "Highlight strings (double or single quoted) in function arguments",
-                            "match": "(\"[^\"]*\"|'[^']*')",
-                            "name": "string.quoted.single-or-double.python"
-                        },
-                        {
-                            "comment": "Highlight commas and parentheses in function calls",
-                            "match": "[,()]",
-                            "name": "punctuation.definition.separator.python"
-                        },
-                        {
-                            "comment": "Highlight arguments in function calls",
-                            "match": "\\b(?!\\d)\\w+\\b(?=\\s*(=|,|\\)|\\n))",
-                            "name": "variable.parameter.function.python"
-                        }
-                    ]
-                },
-                {
-                    "comment": "Highlight embedded expressions within f-strings",
-                    "begin": "f(['\"]{3}|['\"])",
-                    "beginCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.begin.python"
-                        }
-                    },
-                    "end": "(?<!\\{)\\1",
-                    "endCaptures": {
-                        "0": {
-                            "name": "punctuation.definition.string.end.python"
-                        }
-                    },
-                    "name": "string.quoted.fstring.python",
-                    "patterns": [
-                        {
-                            "comment": "Embedded expressions within f-strings",
-                            "begin": "\\{",
-                            "beginCaptures": {
-                                "0": {
-                                    "name": "punctuation.section.embedded.begin.python"
-                                }
-                            },
-                            "end": "\\}",
-                            "endCaptures": {
-                                "0": {
-                                    "name": "punctuation.section.embedded.end.python"
-                                }
-                            },
-                            "name": "source.python.embedded.expression",
-                            "patterns": [
-                                {"include": "#python-expression"},
-                                {
-                                    "comment": "Highlight variables in expressions",
-                                    "match": "\\b\\w+\\b",
-                                    "name": "variable.other.python"
-                                },
-                                {
-                                    "comment": "Highlight operators",
-                                    "match": "[+\\-*/%=<>!&|^~]+",
-                                    "name": "keyword.operator.python"
-                                },
-                                {
-                                    "comment": "Highlight numeric literals",
-                                    "match": "\\b\\d+(\\.\\d+)?\\b",
-                                    "name": "constant.numeric.python"
-                                },
-                                {
-                                    "comment": "Highlight string literals in expressions",
-                                    "match": "(\"[^\"]*\"|'[^']*'|'''.*'''|\"\"\".*\"\"\")",
-                                    "name": "string.quoted.single-or-double.python"
-                                }
-                            ]
-                        }
-                    ]
+                    "include": "#python"
                 }
             ]
         },
@@ -1107,16 +1023,24 @@
                     "match": "^\\s*(frames?|frlink|fralias)\\s+(put|add)(?!\\:)\\s*",
                     "name": "keyword.control.flow.stata",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "keyword.functions.data.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "keyword.functions.data.stata"
+                        }
                     },
                     "comment": "syntax: `frame put varlist, into(newframe)`"
                 },
                 {
                     "match": "^\\s*(frames?)\\s+(\\w+)\\s*\\{",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "entity.name.type.class.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "entity.name.type.class.stata"
+                        }
                     },
                     "comment": "syntax: `frame frame_name { ... }`"
                 },
@@ -1124,10 +1048,18 @@
                     "match": "^\\s*(frames?)\\s+(\\w+):\\s+(\\w+)(\\s+//.*)?$",
                     "name": "keyword.control.flow.stata",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "entity.name.type.class.stata" },
-                        "3": { "name": "keyword.function.command.stata" },
-                        "4": { "name": "comment.line.double-slash.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "entity.name.type.class.stata"
+                        },
+                        "3": {
+                            "name": "keyword.function.command.stata"
+                        },
+                        "4": {
+                            "name": "comment.line.double-slash.stata"
+                        }
                     },
                     "comment": "syntax: `frame frame_name: command // comment`"
                 },
@@ -1135,9 +1067,15 @@
                     "match": "^\\s*(frames?)\\s+(change|create|drop)\\s+(\\w+)",
                     "name": "keyword.control.flow.stata",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "keyword.function.command.stata" },
-                        "3": { "name": "entity.name.type.class.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "keyword.function.command.stata"
+                        },
+                        "3": {
+                            "name": "entity.name.type.class.stata"
+                        }
                     },
                     "comment": "syntax: `frame command frame_name`"
                 },
@@ -1145,12 +1083,24 @@
                     "match": "^\\s*(frlink)\\s+([mM]:[1-9])\\s+(\\w+(?:\\s+\\w+)*)\\s*,\\s*frame\\(([^)]+)\\)(\\s+generate\\((\\w+)\\))?",
                     "name": "keyword.control.flow.stata",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "keyword.operator.relation.stata" },
-                        "3": { "name": "variable.parameter.varlist.stata" },
-                        "4": { "name": "entity.name.type.class.stata" },
-                        "5": { "name": "meta.arguments.stata" },
-                        "6": { "name": "entity.name.type.class.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "keyword.operator.relation.stata"
+                        },
+                        "3": {
+                            "name": "variable.parameter.varlist.stata"
+                        },
+                        "4": {
+                            "name": "entity.name.type.class.stata"
+                        },
+                        "5": {
+                            "name": "meta.arguments.stata"
+                        },
+                        "6": {
+                            "name": "entity.name.type.class.stata"
+                        }
                     },
                     "comment": "syntax: `frlink m:1 varlist, frame(frame_name) generate(link_name)`"
                 },
@@ -1158,9 +1108,15 @@
                     "match": "^\\s*(frget)\\s+(\\w+(?:\\s+\\w+)*)\\s*,\\s*from\\((\\w+)\\)",
                     "name": "keyword.control.flow.stata",
                     "captures": {
-                        "1": { "name": "keyword.control.flow.stata" },
-                        "2": { "name": "variable.parameter.varlist.stata" },
-                        "3": { "name": "entity.name.type.class.stata" }
+                        "1": {
+                            "name": "keyword.control.flow.stata"
+                        },
+                        "2": {
+                            "name": "variable.parameter.varlist.stata"
+                        },
+                        "3": {
+                            "name": "entity.name.type.class.stata"
+                        }
                     },
                     "comment": "syntax: `frget varlist, from(link_name)`"
                 }
@@ -3212,48 +3168,413 @@
                 }
             ]
         },
-        "python-expression": {
+        "python": {
+            "scopeName": "source.python.embedded.stata",
             "patterns": [
                 {
-                    "match": "\\b(def|class|if|elif|else|for|while|try|except|finally|with|as|return|break|continue|pass|import|from|lambda|global|nonlocal|raise|yield|assert)\\b",
-                    "name": "keyword.control.python"
+                    "include": "#python-constant"
                 },
                 {
-                    "match": "\\+|-|\\*|\\/|%|\\*\\*|//|=|==|!=|<|>|<=|>=|\\+=|-=|\\*=|\\/=|%=|\\*\\*=|//=|\\.|,|:|\\(|\\)|\\[|\\]|\\{|\\}",
-                    "name": "keyword.operator.python"
+                    "include": "#python-data-types"
                 },
                 {
-                    "match": "\\b(True|False|None)\\b",
+                    "include": "#python-operators"
+                },
+                {
+                    "include": "#python-control-flow"
+                },
+                {
+                    "include": "#python-strings"
+                },
+                {
+                    "include": "#python-fstring"
+                },
+                {
+                    "include": "#python-comment"
+                },
+                {
+                    "include": "#python-import"
+                },
+                {
+                    "include": "#python-classes-methods"
+                }
+            ]
+        },
+        "python-comment": {
+            "patterns": [
+                {
+                    "match": "(?<!\\w)#.*$",
+                    "name": "comment.line.number-sign.python"
+                }
+            ]
+        },
+        "python-constant": {
+            "patterns": [
+                {
+                    "match": "\\b(None|True|False)\\b",
                     "name": "constant.language.python"
+                },
+                {
+                    "match": "\\b(Exception|ValueError)\\b",
+                    "name": "support.type.exception.python"
                 },
                 {
                     "match": "\\b(int|float|str|list|tuple|dict|set|bool|bytes|object)\\b",
                     "name": "support.type.python"
                 },
                 {
-                    "match": "(?<!\\w)#.*$",
-                    "name": "comment.line.number-sign.python"
+                    "match": "\\b\\d+\\b",
+                    "name": "constant.numeric.dec.python"
+                }
+            ]
+        },
+        "python-control-flow": {
+            "patterns": [
+                {
+                    "match": "\\b(if|elif|else|for|while|try|except|finally|break|continue|return|pass|raise|with|assert)\\b",
+                    "name": "keyword.control.flow.python"
                 },
                 {
-                    "begin": "(\"\"\"|''')",
-                    "end": "\\1",
-                    "name": "string.quoted.multi.python",
-                    "patterns": []
-                },
-                {
-                    "begin": "(\"|')",
-                    "end": "\\1",
-                    "name": "string.quoted.single-or-double.python",
-                    "patterns": []
-                },
-                {
-                    "match": "\\b(and|or|not|is|in)\\b",
+                    "match": "\\b(in|is|not|and|or)\\b",
                     "name": "keyword.operator.logical.python"
                 },
                 {
-                    "comment": "Highlight commas and parentheses",
-                    "match": "[,()]",
-                    "name": "punctuation.definition.separator.python"
+                    "match": "\\b(await)\\b",
+                    "name": "keyword.control.async.python"
+                },
+                {
+                    "match": "\\b(async)\\s+[a-zA-Z_][a-zA-Z0-9_]*",
+                    "name": "storage.type.function.async.python"
+                }
+            ]
+        },
+        "python-data-types": {
+            "patterns": [
+                {
+                    "begin": "\\[",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.list.begin.python"
+                        }
+                    },
+                    "end": "\\]",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.list.end.python"
+                        }
+                    },
+                    "name": "meta.sequence.list.python",
+                    "patterns": [
+                        {
+                            "include": "#python"
+                        }
+                    ]
+                },
+                {
+                    "begin": "\\{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.dict.begin.python"
+                        }
+                    },
+                    "end": "\\}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.dict.end.python"
+                        }
+                    },
+                    "name": "meta.mapping.dictionary.python",
+                    "patterns": [
+                        {
+                            "match": "(\"[^\"]*\"|'[^']*')(?=\\s*:)",
+                            "name": "string.quoted.key.python"
+                        },
+                        {
+                            "match": ":",
+                            "name": "punctuation.separator.dict.python"
+                        },
+                        {
+                            "match": "(\"[^\"]*\"|'[^']*')",
+                            "name": "string.quoted.value.python"
+                        },
+                        {
+                            "include": "#python-constant"
+                        },
+                        {
+                            "include": "#python-operators"
+                        }
+                    ]
+                },
+                {
+                    "match": "\\(",
+                    "name": "punctuation.parenthesis.begin.python"
+                },
+                {
+                    "match": "\\)",
+                    "name": "punctuation.parenthesis.end.python"
+                },
+                {
+                    "match": "[\\{\\}\\(\\)\\[\\]]",
+                    "name": "punctuation.definition.sequence.python"
+                }
+            ]
+        },
+        "python-assignment": {
+            "patterns": [
+                {
+                    "begin": "\\b([a-zA-Z_][a-zA-Z0-9_.]*)\\s*(?==|\\-=|\\+=)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "variable.assignment.python"
+                        }
+                    },
+                    "end": "(?=\\=)",
+                    "name": "meta.assignment.python"
+                },
+                {
+                    "match": "=|\\+=|\\-=",
+                    "name": "keyword.operator.assignment.python"
+                }
+            ]
+        },
+        "python-operators": {
+            "patterns": [
+                {
+                    "match": "\\+|-|\\*|\\/|%|\\*\\*|//\\+=|-=|\\*=|\\/=|%=|\\*\\*=|//=|\\.|,|:|\\(|\\)|\\[|\\]|\\{|\\}",
+                    "name": "keyword.operator.arithmetic.python"
+                },
+                {
+                    "match": "(=|\\+=|\\-=)",
+                    "name": "keyword.operator.assignment.python"
+                },
+                {
+                    "match": "[<>!=]=?",
+                    "name": "keyword.operator.comparison.python"
+                },
+                {
+                    "match": "[&^~<>]{1,2}",
+                    "name": "keyword.operator.bitwise.python"
+                }
+            ]
+        },
+        "python-import": {
+            "patterns": [
+                {
+                    "begin": "\\b(import)\\b\\s+([a-zA-Z_\\.][a-zA-Z0-9_.]*)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.import.python"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.python"
+                        }
+                    },
+                    "end": "\\n"
+                },
+                {
+                    "begin": "\\b(from)\\b\\s+([a-zA-Z_\\.][a-zA-Z0-9_.]*)\\s+(import)\\s*\\(",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.import.python"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.python"
+                        },
+                        "3": {
+                            "name": "keyword.control.import.python"
+                        }
+                    },
+                    "end": "\\)",
+                    "patterns": [
+                        {
+                            "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+                            "name": "entity.name.namespace.python"
+                        }
+                    ],
+                    "comment": "from xxx import (\\nxxx, xxx)"
+                },
+                {
+                    "begin": "\\b(from)\\b\\s+([a-zA-Z_\\.][a-zA-Z0-9_.]*)(\\.[a-zA-Z_][a-zA-Z0-9_.]*)?\\s+(import)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.import.python"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.python"
+                        },
+                        "4": {
+                            "name": "keyword.control.import.python"
+                        }
+                    },
+                    "end": "\\n",
+                    "patterns": [
+                        {
+                            "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+                            "name": "entity.name.namespace.python"
+                        }
+                    ],
+                    "comment": "from xxx import xxx, xxx"
+                }
+            ]
+        },
+        "python-strings": {
+            "patterns": [
+                {
+                    "begin": "'",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "end": "'",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.python"
+                        }
+                    },
+                    "name": "string.quoted.single.python"
+                },
+                {
+                    "begin": "\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "end": "\"",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.python"
+                        }
+                    },
+                    "name": "string.quoted.double.python"
+                },
+                {
+                    "begin": "'''",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "end": "'''",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.python"
+                        }
+                    },
+                    "name": "string.quoted.docstring.multi.python"
+                },
+                {
+                    "begin": "\"\"\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.python"
+                        }
+                    },
+                    "end": "\"\"\"",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.python"
+                        }
+                    },
+                    "name": "string.quoted.docstring.multi.python"
+                }
+            ]
+        },
+        "python-fstring": {
+            "comment": "Highlight embedded expressions within f-strings",
+            "begin": "(f)(['\"]{3}|['\"])",
+            "beginCaptures": {
+                "1": {
+                    "name": "support.type.python"
+                },
+                "2": {
+                    "name": "punctuation.definition.string.begin.python"
+                }
+            },
+            "end": "(?<!\\{)\\2",
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.python"
+                }
+            },
+            "name": "string.quoted.fstring.python",
+            "patterns": [
+                {
+                    "comment": "Handle escaped braces in f-strings (e.g., {{ or }})",
+                    "match": "\\{\\{|\\}\\}",
+                    "name": "constant.character.escape.python"
+                },
+                {
+                    "comment": "Embedded expressions within f-strings",
+                    "begin": "\\{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.section.embedded.begin.python"
+                        }
+                    },
+                    "end": "\\}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.section.embedded.end.python"
+                        }
+                    },
+                    "name": "source.python.embedded.expression",
+                    "patterns": [
+                        {
+                            "include": "#python"
+                        },
+                        {
+                            "comment": "Highlight variables inside expressions",
+                            "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+                            "name": "variable.other.python"
+                        }
+                    ]
+                }
+            ]
+        },
+        "python-classes-methods": {
+            "patterns": [
+                {
+                    "match": "\\b(class)\\b",
+                    "name": "storage.type.class.python"
+                },
+                {
+                    "match": "\\bdef\\b",
+                    "name": "storage.type.function.python"
+                },
+                {
+                    "comment": "Highlight Python functions and arguments",
+                    "patterns": [
+                        {
+                            "begin": "\\b(def)?\\s*([\\w+\\.]+(\\.))?(\\w+)\\(",
+                            "beginCaptures": {
+                                "2": {
+                                    "name": "entity.name.class.python"
+                                },
+                                "3": {
+                                    "name": "keyword.operator.python"
+                                },
+                                "4": {
+                                    "name": "entity.name.function.python"
+                                }
+                            },
+                            "end": "\\)",
+                            "patterns": [
+                                {
+                                    "include": "#python"
+                                },
+                                {
+                                    "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\=)",
+                                    "name": "variable.parameter.function.python"
+                                },
+                                {
+                                    "match": "\\s*,\\s*",
+                                    "name": "punctuation.separator.parameter.python"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

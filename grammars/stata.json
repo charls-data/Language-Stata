@@ -677,6 +677,16 @@
             "comment": "won't match single-line Mata statements",
             "end": "^\\s*end\\s*$\\n?",
             "name": "meta.embedded.block.mata",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.flow.stata"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.control.flow.stata"
+                }
+            },
             "patterns": [
                 {
                     "match": "(?<![^$\\s])(version|pragma|if|else|for|while|do|break|continue|goto|return)(?=\\s)",
@@ -718,7 +728,29 @@
             "end": "^\\s*(end)\\s*$\\n?",
             "name": "meta.embedded.block.python",
             "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.flow.stata"
+                }
+            },
+            "endCaptures": {
                 "0": {
+                    "name": "keyword.control.flow.stata"
+                }
+            },
+            "contentName": "source.python.embedded",
+            "patterns": [
+                {
+                    "include": "#python"
+                }
+            ]
+        },
+        {
+            "begin": "^\\s*(python):\\s*",
+            "comment": "Python one-line code",
+            "end": "\n",
+            "name": "meta.embedded.block.python",
+            "beginCaptures": {
+                "1": {
                     "name": "keyword.control.flow.stata"
                 }
             },

@@ -762,6 +762,10 @@
             "contentName": "source.python.embedded",
             "patterns": [
                 {
+                    "match": "(?<!\\w)///.*$",
+                    "name": "comment.line.python"
+                },
+                {
                     "include": "#python"
                 }
             ]

@@ -740,7 +740,60 @@
             "contentName": "source.python.embedded",
             "patterns": [
                 {
-                    "include": "#python"
+                    "name": "string.quoted.triple.double.python",
+                    "begin": "\"\"\"",
+                    "end": "\"\"\"(?!\")",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.python",
+                            "match": "\\\\."
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.triple.single.python",
+                    "begin": "'''(?!')",
+                    "end": "'''(?!')",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.python",
+                            "match": "\\\\."
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.double.python",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.python",
+                            "match": "\\\\[\\\\'\"abfnrtv]"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.python",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.python",
+                            "match": "\\\\[\\\\'\"abfnrtv]"
+                        }
+                    ]
+                },
+                {
+                    "name": "keyword.operator.python",
+                    "match": "\\b(and|or|not|is|in)\\b"
+                },
+                {
+                    "name": "constant.numeric.python",
+                    "match": "\\b[0-9]+(\\.([0-9]+)?)?\\b"
+                },
+                {
+                    "name": "keyword.control.python",
+                    "match": "\\b(if|elif|else|for|while|break|continue|return|try|except|finally|raise|with|def|class|import|from|as)\\b"
                 }
             ]
         },

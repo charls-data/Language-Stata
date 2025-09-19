@@ -8,7 +8,7 @@
     "contributors": [
         "CHARLS"
     ],
-    "version": "2.0.0",
+    "version": "2.0.1",
     "publisher": "CHARLS",
     "engines": {
         "vscode": "^1.0.0"

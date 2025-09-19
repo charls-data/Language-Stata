@@ -124,3 +124,7 @@
 ### Fixed
 - Regex highlighting error that colored capturing groups wrong
 -
+
+## [2.0.1] - 2025-09-19
+### Added
+- Highlight for Embeded Python code.
